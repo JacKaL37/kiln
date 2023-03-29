@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<head>
+  <style>
+    body{
+      width: 70%;
+      max-width: 750px;
+      margin: 20px auto;
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+      background-image: linear-gradient(
+          -2deg,
+          #DE3163AA,
+          #33F3EF66 33%,
+          #6F00FF77 66%,
+          #FF00FF88
+      );
+    }
+    code{
+      color: #ff00ff;
+      background-color: #002200;
+      font-size: 12pt;
+    }
+    p code{
+      white-space: nowrap;
+    }
+    pre code{
+    }
+    .container{
+      background-color: #11331188;
+      padding: 1px 20px;
+      border-radius: 20px;
+    }
+    h1,h2,h3{
+      background-color: #00000088;
+      border-radius: 10px;
+      text-align: center;
+      padding: 5px 0;
+    }
+    h1{
+      color: #DE3163;
+      margin-top: 50px;
+    }
+    h2{
+      color: #33F3EF;
+    }
+    h3{
+      color: #7F00FF;
+    }
+    a{
+      color: #33F3EF;
+    }
+    strong{
+      color: #DE3163;
+    }
+    em{
+      color: #33F3EF;
+    }
+    img{
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid #000000;
+      border-left: 1px solid #080808;
+      border-top: 1px solid #080808;
+      border-radius: 5px;
+    }
+    p{
+      width: 90%;
+      display: block;
+      margin: 10px auto;
+    }
+    ul, ol{
+      width: 90%;
+      display: block;
+      margin: 10px auto;
+    }
+    pre{
+      width: 90%;
+      display: block;
+      margin: 0 auto;
+    }
+    .navbar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 12%;
+      max-width: 100px;
+    }
+    .navitem{
+      position: relative;
+      width: 100%;
+      margin: 2px 2px;
+    }
+    .navtext {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Roboto';
+      font-weight: bold;
+      color: #FFFFFF;
+      mix-blend-mode:difference;
+      font-size: min(10vh, 12vw);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="navitem">
+      <a href="#run-up-img">
+        <img src="img/vaporwave.png" style="width:100%;"></img>
+        <div class="navtext">&gt;</div>
+      </a>
+    </div>
+    <div class="navitem">
+      <a href="#assignment-1-dots-img">
+        <img src="img/dots.png" style="width:100%;"></img>
+        <div class="navtext">1</div>
+      </a>
+    </div>
+    <div class="navitem">
+      <a href="#assignment-2-confetti-img">
+        <img src="img/confetti.png" style="width:100%;"></img>
+        <div class="navtext">2</div>
+      </a>
+    </div>
+    <div class="navitem">
+      <a href="#assignment-3-reusing-structure-img">
+        <img src="img/dynamic.png" style="width:100%;"></img>
+        <div class="navtext">3</div>
+      </a>
+    </div>
+    <div class="navitem">
+      <a href="#assignment-4-explore-and-share-img">
+        <img src="img/scribbledeguk.png" style="width:100%;"></img>
+        <div class="navtext">4</div>
+      </a>
+    </div>
+  </div>
+
+<div class="container">
+
+<h1 id="kiln">Kiln: <br/> Abstract Programmatic Art</h1>
+
+<img src="./img/kiln-interface.png" onclick="window.open('index.html','_blank')" style="width:100%;"></img>
+
+<img id="run-up-img" src="img/vaporwave.png"></img>
+
+<h1 id="run-up">Run-up to Kiln</h1>
+
+<p>Welcome to <a href="./index.html" target="_blank">Kiln</a>-- a single-page web-app that implements the bare-bones programming language Clay. There are only three <em>types of things</em> in this language:</p>
+<ul>
+<li><em>primitive commands</em>, which trigger direct actions to change the visual output or some internal state of the system,</li>
+<li><em>meta commands</em>, which perform system-level actions like resetting, checking states, or saving outputs</li>
+<li>and <em>user commands</em>, which we ourselves build by combining one or more <em>primitive commands</em>.</li>
+</ul>
+
+<h2 id="but-wait-what-are-we-commanding-here-">But wait, what are we &quot;commanding&quot; here&quot;?</h2>
+<p>Like any programming language, we&#39;re &quot;commanding&quot; the computer.
+The commands make up the <em>language</em> we use to tell the computer what it should do.</p>
+
+<h2 id="but-what-are-we-trying-to-get-the-computer-to-do-">Getting the computer to do what, exactly?</h2>
+<p>In Kiln, the commands are all structured around <em>painting</em> abstract, non-representational art.
+Mostly a bunch of dots.</p>
+
+<h2 id="dealing-with-this-document">Dealing with this document</h2>
+<p>Essentially, just read the paragraphs, and, whenever you see a <code>command</code> alone on its own line--</p>
+<pre><code>&gt; <span class="hljs-keyword">like</span> <span class="hljs-keyword">this</span>
+</code></pre><p>You should <em>enter</em> all of the text to the right of the prompt symbol <code>&gt;</code> <strong>exactly as written</strong> into the <em>command box</em> on Kiln (the glowing text entry line just below the canvas).</p>
+<p>Type each line you see, one at a time, before hitting enter to issue the command(s) to the system.
+You&#39;ll often want to pause a moment between lines to see what changes.</p>
+
+<p>If you're revisiting this document, you can use the images on the hovering lefthand panel to jump right to the section you want.</p>
+
+
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+<img id="assignment-1-dots-img" src="./img/dots.png"></img>
+<h1 id="assignment-1-dots">Assignment 1: <br/> Dots</h1>
+<p>Key Concepts: painting, moving, internal states, defining commands, repeating commands, output</p>
+
+<h2 id="issuing-a-command">Issuing a command</h2>
+<p>Here&#39;s the most basic <em>primitive command</em> in Kiln: <code>paint</code>.</p>
+<pre><code>&gt; <span class="hljs-attribute">paint</span>
+</code></pre>
+<p>We commanded <code>paint</code>. The system took that word-- that <em>symbol</em> composed of that exact combination of letters in that exact order-- and checked it against an internal table of possible commands. It found a <em>primitive command</em> for <code>paint</code> and got to work changing a bunch of pixels in the shape of a circle on the canvas from black to white.</p>
+
+<img src="img/no-dot.png">
+<p>Where once there was no dot.</p>
+<img src="img/dot.png">
+<p>There is now dot.</p>
+
+<p>We have created dot!</p>
+
+<h3 id="so-neat-we-made-a-dot-and-">So, neat. We made a dot. ... And?</h3>
+<p>More DOTS! But wait, if we command <code>paint</code> again...</p>
+<pre><code>&gt; <span class="hljs-attribute">paint</span>
+</code></pre>
+<h3 id="exactness">Exactness</h3>
+<p>Nothing happens? Or maybe the <em>exact same thing</em> happened!</p>
+<p>Any computing system only does <em>exactly</em> what we (or at least, the authors of its software) tell it to-- we told it to <code>paint</code> again.
+What we didn&#39;t do was change <em>where</em> we wanted to paint.</p>
+<p>So let&#39;s try a different command, <code>move</code>.</p>
+<pre><code>&gt; <span class="hljs-built_in">move</span>
+</code></pre><p>... Did anything happen? It didn&#39;t throw up an error, but we didn&#39;t see any outward change.</p>
+<p>Let&#39;s try painting again.</p>
+<pre><code>&gt; <span class="hljs-attribute">paint</span>
+</code></pre><p>Aha! Looks like that <code>move</code> DID do something-- it changed where the system was prepared to paint, from the center (the default location) to a random position elsewhere on the canvas.</p>
+
+<h3 id="internal-states">Internal states</h3>
+<p>We didn&#39;t see any change here, but we saw that the system did change something behind the scenes.
+We can check out what&#39;s happening by using the <em>meta command</em> <code>-state</code> to check what&#39;s going on under the hood.</p>
+<pre><code>&gt; <span class="hljs-deletion">-state</span>
+</code></pre><p>We can see that this command outputs something into Kiln&#39;s running log, below the command entry line.
+Note the X and Y coordinates-- these indicate where the center of the dot will appear if we call <code>paint</code> right now.</p>
+<p>Let&#39;s change that by calling <code>move</code> again, and then calling <code>-state</code> again.</p>
+<pre><code>&gt; <span class="hljs-built_in">move</span>
+&gt; -state
+</code></pre><p>Heyyy, look at that, the coordinates changed!
+Try it a few more times and watch the values change.</p>
+<pre><code>&gt; move
+&gt; -<span class="ruby">state
+&gt; </span>move
+&gt; -<span class="ruby">state
+&gt; </span>move
+&gt; -<span class="ruby">state</span>
+</code></pre><p>This gives us a way to check what&#39;s going on inside the system when nothing is obviously happening on the surface.
+We won&#39;t need this <em>all</em> the time, but it&#39;s good to know how to check when something isn&#39;t working quite like we expected!</p>
+
+<h3 id="multiple-commands">Multiple Commands</h3>
+<p>So, we&#39;ve learned how to paint a circle, and how to move to a new location.
+What if we want to just do both of those at once?
+We run any number of commands in a row, processed left-to-right.</p>
+<pre><code>&gt; <span class="hljs-built_in">move</span> paint
+</code></pre><p>This lets us bundle up multiple commands into a single line!
+Let&#39;s do it a few more times.</p>
+<pre><code>&gt; <span class="hljs-built_in">move</span> paint
+&gt; <span class="hljs-built_in">move</span> paint
+&gt; <span class="hljs-built_in">move</span> paint
+&gt; <span class="hljs-built_in">move</span> paint
+</code></pre>
+
+<h3 id="building-user-commands">Building User Commands</h3>
+<p>Building on the ability to combine commands into a single line, we can ALSO combine them into a NEW command to use repeatedly later!</p>
+<p>To define a <em>new</em> command-- a <em>user command</em>-- we use this format:
+<code>[new command] &gt;&gt; [other] [command] [names]</code></p>
+<p>(Replacing the [ ] bracketed words with command names.)</p>
+<p>Let&#39;s define the command <code>dot</code>, which will <code>move</code> the pointer, and then <code>paint</code>.</p>
+<pre><code>&gt; dot <span class="hljs-meta">&gt;&gt; </span>move paint
+</code></pre><p>Okay, so we&#39;ve defined a new command <code>dot</code>. Let&#39;s try it out.</p>
+<pre><code>&gt; <span class="hljs-built_in">dot</span>
+&gt; <span class="hljs-built_in">dot</span>
+&gt; <span class="hljs-built_in">dot</span>
+&gt; <span class="hljs-built_in">dot</span>
+</code></pre><p>Nice! By combining two primitives, we&#39;ve made a much more useful command-- <code>dot</code> will place a random dot somewhere on the screen.</p>
+
+<h3 id="aside-kiln-buttons">Aside: Kiln Buttons</h3>
+<p>Also notice that the <em>user command</em> <code>dot</code> now shows up on the interface!
+Kiln gives every defined command-- <em>primitive</em> or <em>user</em>-- its own <em>button</em> on the interface to help remind you what&#39;s available.
+This is great for playing around and quickly testing things-- just remember that it&#39;s still all the <em>language</em> of Clay underneath.
+Every button on Kiln&#39;s interface-- or ANY computer interface-- is just executing a <em>command</em> in the <em>language</em> the program is using behind the scenes.</p>
+
+<h3 id="repetition">Repetition</h3>
+<p>So, we taught Kiln how to make randomly placed <code>dot</code>s.
+If we only want to make a few dots, we can just type &quot;dot&quot; several times.</p>
+<pre><code>&gt; <span class="hljs-built_in">dot</span> <span class="hljs-built_in">dot</span> <span class="hljs-built_in">dot</span> <span class="hljs-built_in">dot</span> <span class="hljs-built_in">dot</span>
+</code></pre><p>But! What if we want to make a LOT of dots?
+We can use Clay&#39;s <em>repetition</em> feature.
+By putting a number <em>before</em> a command, we can tell the system to repeat it that many times.</p>
+<p>Let&#39;s add 20 dots to this screen.</p>
+<pre><code>&gt; <span class="hljs-number">20</span><span class="hljs-built_in">dot</span>
+</code></pre><p>Hey! That&#39;s 20 fresh dots, all from a single command!</p>
+<p>Let&#39;s get wild with it.</p>
+<pre><code>&gt; <span class="hljs-number">200</span><span class="hljs-built_in">dot</span>
+</code></pre><p>That&#39;s a lot of dots, y&#39;all.</p>
+<p>MORE!</p>
+<pre><code>&gt; <span class="hljs-number">2000</span><span class="hljs-built_in">dot</span>
+</code></pre><p>... that was too many dots.</p>
+
+<h3 id="aside-exactness-revisited">Aside: Exactness revisited</h3>
+<p>Notice that the command for repetition isn&#39;t <code>20dots</code>, as in the english plural.
+The Clay language does NOT have a concept of &quot;plural-S&quot; like english does.
+Trying to add that &quot;s&quot; will throw up an error.</p>
+<pre><code>&gt; <span class="hljs-number">20d</span>ots
+</code></pre><p>That extra &#39;s&#39; just makes the system think the command you&#39;re asking for doesn&#39;t exist.
+It knows a command called <code>dot</code>, but it&#39;s never heard of a command called <code>dots</code>.
+Remember, Kiln recognizes commands by the <em>exact letters in an exact order</em>.
+After all, you could have defined a completely <em>different</em> command named <code>dots</code> if you&#39;d wanted to.</p>
+
+<h3 id="cleaning-the-canvas-resetting-the-state">Cleaning the Canvas, Resetting the State</h3>
+<p>Anyway, we done made a mess of dots, huh.
+It&#39;s getting crowded.
+Let&#39;s clean up using the <code>-clean</code> <em>meta command</em>.</p>
+<pre><code>&gt; <span class="hljs-deletion">-clean</span>
+</code></pre><p>Great! We&#39;ve cleaned up to a fresh, blank canvas.</p>
+<p>But, take note! We have <em>only</em> cleaned the canvas.
+Everything else about Kiln is still just as it was a moment ago.</p>
+<p>Let&#39;s check the <code>-state</code>, <code>-clean</code> the canvas again, then check the <code>-state</code> again.</p>
+<pre><code>&gt; -<span class="ruby">state</span></code></pre>
+<p>Note the X,Y coordinates.</p>
+<pre><code>&gt; -<span class="ruby">clean
+&gt; </span>-<span class="ruby">state</span>
+</code></pre><p>Notice that the x/y coordinates in the state are the same before and after the <code>-clean</code> command.</p>
+<p>To reset the system&#39;s internal state, we can use the <em>meta command</em> <code>-reset</code>.</p>
+<pre><code>&gt; <span class="hljs-deletion">-reset</span>
+</code></pre><p>It&#39;s important to recognize that some <em>meta commands</em> only affect an external or internal element of the Kiln system, just like with <em>primitive commands.</em></p>
+
+<h3 id="creating-and-saving-our-abstract-art">Creating and Saving our Abstract Art</h3>
+<p>Okay, so we&#39;ve got a clean canvas.
+Let&#39;s make something fresh.</p>
+<p>What would 250 dots against this fresh background look like?</p>
+<pre><code>&gt; <span class="hljs-number">250</span><span class="hljs-built_in">dot</span>
+</code></pre><p>Nice.
+Less messy than our <code>2000dot</code>, a bit more form to look at.
+Let&#39;s save it.</p>
+<p>The <code>-snapshot</code> <em>meta command</em> tells Kiln to package up the canvas into a .png file that your browser can then download directly.</p>
+<pre><code>&gt; <span class="hljs-deletion">-snapshot</span>
+</code></pre><p><strong>Save this image somewhere easy to find, so you can submit it for this assignment!</strong></p>
+<p>So there you go! You just instructed a machine to algorithmically create some simple dot-art.</p>
+
+<h3 id="teardown">Teardown</h3>
+<p>Alright, we&#39;re all done here.</p>
+<p>While closing the Kiln app&#39;s page will do most cleanup for us, it&#39;s good practice to <em>intentionally</em> clean your space so that you aren&#39;t surprised if something leftover sneaks into your next session!</p>
+<p>Let&#39;s <code>-clean</code> the canvas (remembering that we already saved the output image).</p>
+<pre><code>&gt; <span class="hljs-deletion">-clean</span>
+</code></pre><p>And then we&#39;ll <code>-reset</code> the state of the system.</p>
+<pre><code>&gt; <span class="hljs-deletion">-reset</span>
+</code></pre><p>Finally, let&#39;s deal with the <em>user commands</em> we&#39;ve created.</p>
+<p>Your recent user commands are saved in your browser&#39;s <em>local storage</em>, so if you accidentally close Kiln&#39;s tab, your commands will still be there.</p>
+<p>But! This also means that your old commands will start to accumulate and might start to clutter up the space, if they aren&#39;t useful anymore.</p>
+<p>To avoid that sort of clutter, the <code>-forget</code> <em>meta command</em> lets us intentionally clear our user commands so we can start fresh next time.</p>
+<pre><code>&gt; <span class="hljs-deletion">-forget</span>
+</code></pre><p>There. Leave no trace!
+It&#39;s like we were never here!
+We can start fresh next time.</p>
+
+<h2 id="assignment-1-recap">Assignment 1 Recap</h2>
+<img src="img/dots.png"></img>
+<p>In this assignment, we covered:</p>
+<ul>
+<li>the basics of giving <em>exact</em> commands to the Kiln system to produce art.</li>
+<li>how both <em>internal</em> and <em>external</em> states change in response to our commands</li>
+<li>and how we can <em>bundle</em> commands up into new, more useful ones</li>
+<li>which we can also <em>repeat</em> in large quantities</li>
+<li>then we saw how to <em>save our output</em> and <em>clean up our workspace</em>.</li>
+</ul>
+
+<h2 id="assignment-1-submission">Assignment 1 Submission</h1>
+<p>In the submission page for Assignment 1 on Blackboard, submit the following:""</p>
+<ul>
+  <li>the image of the 250 dots.</li>
+</ul>
+<p>Yup! It's easy as that. <i>Told</i> you it'd be a gentle introduction.</p>
+
+
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+
+
+<img id="assignment-2-confetti-img" src="img/confetti.png"></img>
+
+<h1 id="assignment-2-confetti">Assignment 2: <br/> Confetti</h1>
+<p>Concepts: combining multiple commands, bottom-up design, repeating commands, colors</p>
+
+
+<p>Okay, we&#39;ve managed to paint some dots on a screen and save the image.
+That&#39;s pretty neat.
+But currently we&#39;re dealing with a pretty simple world: white dots on a black background. </p>
+
+<h2 id="interesting-complexity">Interesting Complexity</h2>
+<p>Let&#39;s get a little more interesting by increasing the <em>complexity</em> of our art.
+Our current color scheme is binary-- exactly two possible values: black or white.
+If we look at some of the available <em>primitive commands</em>, though, we see some things that might be... more colors! </p>
+
+<h2 id="setup">Setup</h2>
+<p>Before we do anything else, I want us working from a clean slate, so JUST IN CASE, let&#39;s run the same commands from the end of the last segment to make sure there&#39;s no lingering paint, hidden states, or user commands that might trip up our fresh start here. </p>
+<pre><code>&gt; -<span class="ruby">clean
+&gt; </span>-<span class="ruby">reset
+&gt; </span>-<span class="ruby">forget</span>
+</code></pre>
+
+<h2 id="painting-revisited">Painting revisited</h2>
+<p>So when we paint a white dot...</p>
+<pre><code>&gt; <span class="hljs-attribute">paint</span>
+</code></pre><p>... its system interprets that command as something along the lines of &quot;change the pixels around my current position (X and Y coordinates) from whatever color they were (BLACK) to my current color (WHITE)&quot;.
+Let&#39;s look at the <code>-state</code> to see some of this... </p>
+<pre><code>&gt; <span class="hljs-deletion">-state</span>
+</code></pre><p>So now, looking at the state...
+We&#39;ve already discussed the X and Y coordinates quietly representing the position of the painter.
+But &quot;color&quot; is showing something strange-- &quot;FFFFFF&quot;
+What the heck is the color fffffffffffffff?</p>
+
+<h2 id="aside-hexadecimal-numbers">Aside: Hexadecimal Numbers</h2>
+<p>Here&#39;s the trick: &quot;FFFFFF&quot; is actually a representation of <em>three separate numbers</em>.
+Each slot is a value between &#39;0&#39; and &#39;F&#39;, [0123456789ABCDEF]
+This <em>representation</em> of numbers is known as <em>hexadecimal</em>-- <em>hex</em> meaning 6, and <em>decimal</em> meaning 10, so 16 possible values per slot. </p>
+<p>Contrast <em>hexadecimal</em> representation with our standard numerical system we use every day, <em>decimal</em>, where each slot can have only 0-9, [0123456789].
+We can see that <em>hexadecimal</em> is more <em>compact</em>, where a single slot can store 16 different values, versus <em>decimal&#39;s</em> 10. </p>
+
+<h3 id="color-as-number">Color as Number</h3>
+<p>Pixel colors on modern screens are typically determined by three separate values: <em>amount of red</em>, <em>amount of green</em>, and <em>amount of blue</em>.
+In the &quot;FFFFFF&quot; color notation, there are 2 values per color, left to right, for red, green, and blue, all between 0 (00) and 255 (FF). </p>
+<p>Looking back at our &quot;FFFFFF&quot; representing &quot;white&quot;, and knowing a bit more about <em>hexadecimal</em> now, we can break it down to realize that this is essentially just saying &quot;turn the amount of all three colors up to the maximum possible&quot;. </p>
+<p>SO! When we tell the system to <code>paint</code> when the color is set to &quot;FFFFFF&quot;, it changes all the pixels around the painter&#39;s position to be maxed out in all three colors-- a white dot!</p>
+
+<h2 id="color-presets">Color presets</h2>
+<p>Kiln comes with several <em>different</em> preset colors we can mess with. </p>
+<p>Let&#39;s try <code>pink</code>.</p>
+<pre><code>&gt; <span class="hljs-attribute">pink</span>
+</code></pre><p>Okay, similar to <code>move</code>, <code>pink</code> hasn&#39;t done anything obvious.
+But let&#39;s check the <code>-state</code>.</p>
+<pre><code>&gt; <span class="hljs-deletion">-state</span>
+</code></pre><p>Aha! The color value in the state has changed from &quot;FFFFFF&quot; to &quot;FF00FF&quot;, or, through our lens...</p>
+<ul>
+<li>maximum red </li>
+<li>no green </li>
+<li>maximum blue </li>
+</ul>
+<p>Let&#39;s see what that looks like...</p>
+<pre><code>&gt; <span class="hljs-attribute">paint</span>
+</code></pre><p>We&#39;ve created a <code>pink</code> dot!
+Right on top of our previous <code>white</code> dot, too. </p>
+<p>Let&#39;s explore some more colors. </p>
+<pre><code>&gt; indigo paint
+&gt; <span class="hljs-deletion">-state</span>
+</code></pre><p>There&#39;s an <code>indigo</code> dot. </p>
+<pre><code>&gt; cerise paint
+&gt; <span class="hljs-deletion">-state</span>
+</code></pre><p>And now a <code>cerise</code> dot, cool. </p>
+<p>Alright, we&#39;re getting the hang of colors.
+Now let&#39;s do something more complex with them. </p>
+
+<h2 id="bottom-up-design">Bottom-Up Design</h2>
+<p>Alright, if we&#39;re going to build up to a larger something-or-other using these different colored dots, we could go one of two ways:</p>
+<ul>
+<li>figure out what the high level structure is first and work down from there, (top-down)</li>
+<li>define the lower-level pieces first and work up from there (bottom-up)</li>
+</ul>
+<p>Both are fine ways to work, and you often want to keep both in mind, but for now we&#39;ll focus on the bottom up. </p>
+
+<h3 id="most-basic-unit-the-dot-">Most basic unit: the dot!</h3>
+<p>To start, let&#39;s reuse the concept of the <code>dot</code> from the first segment as a basic <em>user command</em>. </p>
+<pre><code>&gt; dot <span class="hljs-meta">&gt;&gt; </span>move paint
+</code></pre><p>Great, we&#39;ve got our favorite dot command going again.
+Let&#39;s test it real quick. </p>
+<pre><code>&gt; <span class="hljs-number">5</span><span class="hljs-built_in">dot</span>
+</code></pre><p>Great, working as intended.
+Now let&#39;s elaborate on it...</p>
+
+<h3 id="coloring-dots">Coloring Dots</h3>
+<p>So now we can make a dot any time we want, just as before.
+Well, now that we know about colors, we make different <em>kinds</em> of dots!</p>
+<p>Let&#39;s scatter a few pink dots around. </p>
+<pre><code>&gt; pink <span class="hljs-number">5</span><span class="hljs-built_in">dot</span>
+</code></pre><p>How about some <code>aqua</code>, we haven&#39;t tried that yet.</p>
+<pre><code>&gt; aqua <span class="hljs-number">5</span><span class="hljs-built_in">dot</span>
+</code></pre><p>How about a BUNCH of <code>indigo</code> dots!</p>
+<pre><code>&gt; indigo <span class="hljs-number">50</span><span class="hljs-built_in">dot</span>
+</code></pre><p>And <em>one</em> <code>cerise</code> dot.</p>
+<pre><code>&gt; <span class="hljs-attribute">cerise dot</span>
+</code></pre>
+
+<h2 id="chaining-user-commands">Chaining User Commands</h2>
+<p>So we see how useful it is to swap the color of the painter before painting another dot.
+Let&#39;s combine our <code>dot</code> <em>user command</em> with these color changing <em>primitive commands</em> to make commands that create specific types of dots. </p>
+<p>We do this the same way we define <em>any</em> user command, but we can include our user command <code>dot</code> when we do. </p>
+<p>Let&#39;s define a specific dot command for each of the colors we&#39;ve seen so far.
+We might edit these later, so we&#39;ll use a generic name for these colored dots (e.g., &quot;dota&quot; and &quot;dotb&quot;), rather than names specific to these colors (e.g., &quot;pinkdot&quot; or &quot;indigodot&quot;)</p>
+<pre><code>&gt; dota <span class="hljs-meta">&gt;&gt; </span>pink dot
+&gt; dotb <span class="hljs-meta">&gt;&gt; </span>indigo dot
+&gt; dotc <span class="hljs-meta">&gt;&gt; </span>cerise dot
+&gt; dotd <span class="hljs-meta">&gt;&gt; </span>aqua dot
+</code></pre><p>Great!
+Now we have four different colored dots.
+Let&#39;s test them.</p>
+<pre><code>&gt; <span class="hljs-attribute">dota dotb dotc dotd</span>
+</code></pre><p>They work! </p>
+<p>Let&#39;s try a whole lot more, so we can fill the space up.</p>
+<pre><code>&gt; <span class="hljs-number">500d</span>ota <span class="hljs-number">500d</span>otb <span class="hljs-number">500d</span>otc <span class="hljs-number">500d</span>otd
+</code></pre><p>Well, that seems to have worked, but we&#39;re seeing a LOT of aqua in this, right?
+And where&#39;s all the pink?</p>
+
+<h3 id="left-to-right-back-to-front">Left-to-right, back-to-front</h3>
+<p>Remember, the commands occur left-to-right, so commands on the left will be read and executed first, and thus whatever is painted in the first command will get covered up by things that come next.</p>
+<p>So right now, although we&#39;ve used the same number of dots of each color, the first dots are stuck in the back, while the most recent dots are all over the place in front!</p>
+<p>How do we fix this?</p>
+
+<h3 id="interleving-and-repetition">Interleving and repetition</h3>
+<p>Right now, we&#39;re telling Kiln to paint a whole lot of dots, one color at a time.
+Instead, to make them more evenly spread out, we could paint one dot of each color, and repeat <em>that</em>. </p>
+<p>But how do we do that without having to type <code>dota dotb dotc dotd dota dotb dotc dotd dota ...</code> repeating about 500 times?</p>
+<p>We can wrap the behavior we DO want to repeat-- i.e., painting one of each color dot in order-- into its own <em>user command</em>, and then <em>repeat that command</em>.
+We&#39;ll call it &quot;confetto&quot;.
+(Did you know that&#39;s the singular form of &quot;confetti&quot;?)</p>
+<pre><code>&gt; confetto <span class="hljs-meta">&gt;&gt; </span>dota dotb dotc dotd
+</code></pre><p>Let&#39;s <code>-clean</code> things up, then test this new multicolor dot command!</p>
+<pre><code>&gt; -<span class="ruby">clean
+&gt; </span>confetto
+&gt; 2confetto
+&gt; 50confetto
+</code></pre><p>There we go!
+We&#39;ve changed from repeating individual colors, to repeating &quot;one of each color&quot;. </p>
+<p>Let&#39;s wrap all this up in a single command so we can paint this with a single word or button press!
+First define it...</p>
+<pre><code>&gt; confetti <span class="hljs-meta">&gt;&gt; </span><span class="hljs-number">500</span>confetto
+</code></pre><p>Then issue the command...</p>
+<pre><code>&gt; <span class="hljs-attribute">confetti</span>
+</code></pre><p>This looks good.
+Let&#39;s save it!</p>
+<p>First we&#39;ll clean up, then draw, then snapshot it.</p>
+<pre><code>&gt; -<span class="ruby">clean
+&gt; </span>confetti
+&gt; -<span class="ruby">snapshot</span>
+</code></pre><p><strong>Save this image somewhere easy to find, so you can submit it for this assignment!</strong></p>
+<p>Ta-da: you&#39;ve made some colorful, non-representational art by issuing commands to a computer. </p>
+
+<h3 id="nested-command-structure">Nested command structure</h3>
+<p>So now we have several commands defined, from the complex and lively <code>confetti</code> all the way back down to the humble <code>dot</code>.</p>
+<p>Each one of these commands is direclty connected to-- and composed of, the others. Let's trace it down for a moment...</p>
+<ul>
+<li><code>confetti</code> is composed of 500 <code>confetto</code> repetitions.</li>
+<li>Each <code>confetto</code> command calls all four of <code>dota</code>, <code>dotb</code>, <code>dotc</code>, and <code>dotd</code> once each.</li>
+<li>Each of the various <code>dot_</code> commands calls one primitive color-changing command (<code>pink</code>,<code>indigo</code>,<code>cerise</code>, and <code>aqua</code>), followed by <code>dot</code>.</li>
+<li>And <code>dot</code> calls the primitive commands <code>move</code> and <code>paint</code></li>
+</ul>
+
+<p>Notice the flow of it all-- these higher-complexity concepts like <code>confetti</code> or <code>confetto</code> are all made up of other user-defined concepts, literal actions taken by the system, or both.
+The linguists among us may see the outline of a <em>generative grammar</em> hiding somewhere in here, but for the rest of us, this is essentially <em>how all language works</em>: packaging up specific, semantically meaningful elements into more and more complex representative ideas (and, often, jargon).</p>
+
+<h2 id="assignment-2-recap">Assignment 2 Recap</h2>
+<img src="img/confetti.png"></img>
+<p>In this assignment: </p>
+<ul>
+<li>most obviously, we introduced <em>color</em> to the mix, and discussed how to read <em>hexadecimal color codes</em>. </li>
+<li>we also saw how to <em>combine multiple commands</em> into a more complex overall <em>structure</em></li>
+<li>relatedly, we saw how we could build something from the <em>bottom-up</em>-- starting with the simplest commands and building off of them. </li>
+<li>we also saw how <em>repeating several individual commands one at a time</em> was a very different thing from <em>repeating a single command (with multiple commands inside it)</em> the same number of times. </li>
+<li>examined the <em>nested structure</em> of our set of commands, and its parallels to natural language</li>
+</ul>
+
+<h2 id="assignment-2-submission">Assignment 2 Submission</h1>
+<p>In the submission page for Assignment 2 on Blackboard, submit the following :</p>
+<ul>
+  <li>the image of the pink, indigo, cerise, and aqua confetti.</li>
+</ul>
+
+
+
+
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+
+
+
+
+
+<img id="assignment-3-reusing-structure-img" src="./img/dynamic.png"></img>
+
+<h1 id="assignment-3-reusing-structure">Assignment 3: <br/> Reusing Structure</h1>
+<p>Concepts: editing commands, edit depth, size, and transparency </p>
+
+<p>Alright, so we have this one-click command to splatter our canvas with tons of these four colors of dots: <code>pink</code>,<code>indigo</code>,<code>cerise</code>, and <code>aqua</code>.
+But what if we want other colors? How can we do that?</p>
+
+<h2 id="editing-commands">Editing Commands</h2>
+<p>The beauty of the commands we&#39;ve defined is that they&#39;re a <em>reusable structure</em>.
+We don&#39;t have to start from scratch just to change the colors. </p>
+<p>Here, let&#39;s edit <code>dota</code> to use a different color.
+Let&#39;s go with <code>ember</code>.</p>
+<pre><code>&gt; dota <span class="hljs-meta">&gt;&gt; </span>ember dot
+</code></pre><p>Now let&#39;s try our splatter-shot <code>confetti</code> command again. </p>
+<pre><code>&gt; <span class="hljs-attribute">confetti</span>
+</code></pre><p>There we go!
+We changed a <em>single</em> definition in this command structure, and it has radically altered the color scheme. </p>
+<p>Let&#39;s swap the rest with other colors, then call <code>confetti</code> again. </p>
+<pre><code>&gt; dotb <span class="hljs-meta">&gt;&gt; </span>dkgray dot
+&gt; dotc <span class="hljs-meta">&gt;&gt; </span>cerise dot
+&gt; dotd <span class="hljs-meta">&gt;&gt; </span>indigo dot
+&gt; confetti
+</code></pre><p>Same concept.
+Same instructions.
+Just a couple of color names swapped out, and we&#39;ve got a wildly different painting on our hands. </p>
+
+<h2 id="pick-your-palette">Pick your Palette</h2>
+<p>Now pick your own colors! </p>
+<p>Redefine the <code>dota</code>, <code>dotb</code>, <code>dotc</code>, and <code>dotd</code> commands using four colors of your choice.
+The available colors are: <code>pink</code>, <code>indigo</code>, <code>cerise</code>, <code>aqua</code>, <code>lemon</code>, <code>lime</code>, <code>ember</code>, <code>white</code>, <code>ltgray</code>, <code>mdgray</code>, <code>dkgray</code>, and <code>black</code>.</p>
+<p>Play around with it a bit until you find a color scheme you like.
+Explore the space by redefining one or two of the <code>dot#</code> commands above with a color, then calling <code>confetti</code> to see how it looks. </p>
+<p>Once you&#39;re happy with it, let&#39;s do a clean snapshot. </p>
+<pre><code>&gt; -<span class="ruby">clean
+&gt; </span>confetti
+&gt; -<span class="ruby">snapshot</span>
+</code></pre><p><strong>Save this image somewhere easy to find, so you can submit it for this assignment!</strong></p>
+
+<h2 id="deeper-edits-larger-changes">Deeper edits, larger changes</h2>
+<p>Ready for a radical shift without much effort? </p>
+<p>The commands we just edited were in the middle of our structure-- we made four key changes to some special-purpose commands and it altered our painting quite a bit.
+But the more fundamental a command is to the whole structure, the more a change will shake things up. </p>
+<p>So let&#39;s revisit our most basic user command: <code>dot</code>. </p>
+<p>Right now, <code>dot</code> just says <code>move</code> to a random place, and then <code>paint</code>.
+Let&#39;s add something new into the mix: setting a random <em>transparency</em> for our dots using the <code>alpha</code> command.
+All we need to do is call the <code>alpha</code> command somewhere in <code>dot</code> <em>before</em> it calls <code>paint</code>.</p>
+<pre><code>&gt; dot <span class="hljs-meta">&gt;&gt; </span>move alpha paint
+&gt; confetti
+</code></pre><p>Would you look at that-- look at how changing the transparency has affected the <em>depth</em> of this painting.</p>
+<p>Let&#39;s make one more change to this most fundamental command: set a random <code>size</code> of the dot.</p>
+<pre><code>&gt; <span class="hljs-keyword">dot</span> &gt;&gt; <span class="hljs-keyword">move</span> <span class="hljs-keyword">size</span> alpha paint
+&gt; confetti
+</code></pre><p>Whew!
+We&#39;re in a much different place than when we started, huh?
+We&#39;ve changed <em>very little</em> about the definition of our program&#39;s command structure, but we&#39;ve <em>radically</em> changed the output image.</p>
+<p>Speaking of which, let&#39;s generate a fresh one.
+You know the drill:</p>
+<pre><code>&gt; -<span class="ruby">clean
+&gt; </span>confetti
+</code></pre><p>Now, you could save this one as it is.
+But there&#39;s a lot of <em>randomness</em> in this generative art, maybe we want to see a different version.</p>
+<pre><code>&gt; <span class="hljs-attribute">confetti
+&gt; confetti
+&gt; confetti
+&gt; confetti</span>
+</code></pre><p>Notice how it&#39;s pretty wildly different each time.</p>
+<p>Continue typing or pressing the button for <code>confetti</code> until you&#39;ve got something you like.</p>
+<p>Then let&#39;s save it: </p>
+<pre><code>&gt; <span class="hljs-deletion">-snapshot</span>
+</code></pre><p><strong>Save this image somewhere easy to find, so you can submit it for this assignment!</strong></p>
+
+<h2 id="final-cleanup-and-submission">Cleanup</h2>
+<p>Alright, before you leave, remember to clean up your workspace. </p>
+<pre><code>&gt; -<span class="ruby">clean
+&gt; </span>-<span class="ruby">reset
+&gt; </span>-<span class="ruby">forget</span>
+</code></pre><p>Now the next time you load up the Kiln site, it will sit fresh and empty, waiting for you to cook up some commands.</p>
+
+<h2 id="assignment-3-recap">Assignment 3 Recap</h2>
+<img src="./img/swapped.png"></img>
+<img src="./img/dynamic.png"></img>
+<p>In this assignment, we examined:</p>
+<ul>
+<li>how we can alter <em>individual pieces</em> of our overall command structure to change elements like color </li>
+<li>how, the more <em>fundamental</em> a command is in our command structure, the more a single change will alter the outcome</li>
+<li>how to randomly adjust both the <em>alpha (transparency)</em> and <em>size</em> of our dots to create a much more dynamic final product</li>
+</ul>
+
+<h2 id="assignment-3-submission">Assignment 3 Submission</h1>
+<p>In the submission page for Assignment 3 on Blackboard, submit the following :</p>
+<ul>
+  <li>the image of confetti using your custom palette.</li>
+  <li>the image of the more dynamic overlapping transparent circles.</li>
+</ul>
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+<img id="assignment-4-explore-and-share-img" src="./img/scribbledeguk.png"></img>
+<h1 id="assignment-4-explore-and-share">Assignment 4: <br/> Explore and Share!</h1>
+<p>So now you&#39;ve seen some of the fundamentals of Kiln, and how they can be combined to create various forms of abstract art.
+I&#39;d like to see where you can go from here. </p>
+<p>Explore the rest of Kiln&#39;s functions and experiment a bit. </p>
+<p>To see descriptions of Kiln&#39;s full suite of commands, type or press the button labeled <code>-help</code> to pop open a help panel at the bottom of the app.
+The descriptions are brief, but should be enough to orient your curiosity.</p>
+<pre><code>&gt; <span class="hljs-deletion">-help</span>
+</code></pre><p>Also note that there are a lot of commands hidden from the main interface, so they may not all be <em>totally</em> stable, but you should be just fine messing with them. </p>
+<pre><code>[<span class="hljs-keyword">do</span> whatever you feel <span class="hljs-keyword">like</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">while</span>]
+[<span class="hljs-keyword">like,</span> at least <span class="hljs-keyword">20</span> <span class="hljs-keyword">minutes</span> or <span class="hljs-keyword">so</span>]
+</code></pre><p>Remember, this is art, there&#39;s no exact correct answer here.
+As long as you&#39;re getting your head into the idea of <em>expressing yourself</em> using this new set of tools, you&#39;re good. </p>
+<p>For a bit of inspiration, the image above this assignment is the most semi-coherent thing I&#39;ve come up with so far. </p>
+
+
+<p>After you&#39;ve explored a bit and settled on something you feel represents the highlights of your exploration, <em>show me what you&#39;ve got!</em>
+Use the command <code>-snapshot</code> to capture the image as before, but <em>also</em> use the command <code>-memorize</code> to <em>save a copy of your user commands</em> in the form of a text file. </p>
+<p>Include both of these in your final submission.</p>
+
+<h2 id="assignment-4-submission">Assignment 4 Submission</h1>
+<p>In the submission page for Assignment 4 on Blackboard, submit the following :</p>
+<ul>
+  <li>the snapshot of the piece you created.</li>
+  <li>the text file containing your command definitions that generated the piece.</li>
+</ul>
+
+
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+
+<img src="./img/vaporwave.png"></img>
+<p><em>And thanks for coming along! I hope you at least got a kick out of messing with these commands, tapping a few buttons, teaching a machine how to paint, and picking up some of the underpinnings of all modern programming along the way.</em></p>
+
+<p><em>-JKL</em></p>
+
+<div style="height: 400px;"></div>
+
+</div>
+</body>

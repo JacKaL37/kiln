@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+    Kiln: Programmatic Art using the simple Clay language
+    Copyright (C) 2020 John K. Lindstedt, PhD.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<!--
+
+implement home,
+- create a panel for each region
+- examples as a forever region?
+
+
+- get boostrap up in here:
+  - modals
+  - media queries
+
+sanitize definitions- cannot CONTAIN THEMSELVES!!
+
+todo:
+- ENTERING, LEAVING, UPLOADING, and DOWNLOADING name spaces
+    - just need functions to save to and decode namespace COMMANDS
+    - leap back through parents until "home"
+- progression- start very restricted, grow
+    - button panel as slidedowns?
+    - log as dropdown, too!
+- syntax checking and sanitation
+- may still need a small execution edit
+- lots of fun prims yet to implement
+- modals - still
+
+- chiptune;
+
+- get some toggles going for more canvas sizes
+
+- move "expand token" inside of the "execute token" situation.
+  - this will keep things tidier, and allow for some of the more
+  - subtle functionality from the original, like stops.
+
+- begin - end is just a GUI way to define a command
+
+compsci principles
+- problem decomposition
+- invariance (biggest)
+- patterning;
+- quality as determined by "elegance", Sigma, etc
+- layered / incremental programming - strong delineations
+  - zooming in to the level of "solvable"
+- bottom-up / top-down
+- visible and invisible beauty
+- scope and scale
+
+
+
+primitives:
+- more colors: blue, red, yellow, green, orange, violet
+- shades of gray: white, lightgray, gray, darkgray, black
+- color: sets a random color
+- paint / draw
+- mfd, mbk, mrt, mlt, tr, tl, ta, turn (random)
+  - needs heading state, etc
+- s/x3, s/x5, s/x7,
+- expand (random expansion)
+- shrink (random shrinkage)
+- fade (random fade)
+- glow (random glow)
+
+
+- wait
+- star (run custom command script)
+- push (painter, circle, and counter) onto stack
+- pop (painter, circle, and counter) off the stack
+- STOP?P - stop when painter is beyond canvas
+- STOP?S - stop when circle too large
+- STOP?N - stop when counter is big.
+  - thes likely require a rework of the order of how I evaluate commands
+- ++ - increment counter
+- ~~ - decrement counter
+
+metas:
+-@? : current region
+-S? : names of functions in current state
+-S?? : definitions of functions in current state
+-MC? : names of meta-commands in current region
+-MC?? : definitions of meta-commands in current region
+-STATE : show current state of the
+  - painter (location, heading, color),
+  - circle (radius), and
+  - counter (value)
+
+-UNPLUG : kills the current thread (if taking too long?)
+-EXIT : kills the entire program (?)
+
+-HISTORY : commands will now accumulate in the output area
+
+-RESET : (need to fix- ) resets both SHAPE, PAINTER, and COUNTER
+-RESETSHAPE : resets shape
+-RESETPAINTER : resets painter
+-RESETCOUNTER : resets the counter
+-CLEAR : empty the text window
+-CLEAN : clear the canvas with white
+
+-DISPLAY : show the definition of a specified "program"
+
+-ENTER : enter (or create) a sub-region
+-LEAVE : return from current region to parent region
+-HOME : return to the home region
+-DELETE : delete a command from the current region (only)
+
+
+-RECORD : save canvas to file
+-RECORDINGS : show all the recordings so far
+
+-MOVE : toggle move parameters
+-TURN : toggle turn parameters
+-SIZE : toggle size parameters
+
+-FLOAT : move a given command up to the parent region
+-SINK : move a given command down to a child region
+
+-BEGIN : start recording a new macro
+-END : stop recording a macro
+
+-RESERVED : NOT FOR YOU
+
+-DRAWDELAY : toggle whether there's a draw delay or not
+
+-GARGOYLE : About Gargoyle
+-KILN : About Kiln
+
+-SIGMA : take length, number of commands, (feedback for bad-length command definitions)
+
+-MORE :
+EXTENDED SIZE CHANGING COMMANDS : X11 X13 X17 X19 X23 X29 S11 S13 S17 S19 S23 S29
+SIZE CHANGING COMMANDS : INC INC2 INC3 INC4 INC5 DEC DEC2 DEC3 DEC4 DEC5 ALTERSIZE
+BRUSH SIZE CHANGING COMMANDS : INCBW DECBW
+ABSOLUTE MOVEMENT COMMANDS : MFD1 MBK1 MRT1 MLT1 MFD2 MBK2 MRT2 MLT2 MFD3 MBK3 MRT3 MLT3 MFD4 MBK4 MRT4 MLT4 MFD5 MBK5 MRT5 MLT5
+TURN 360/N COMMANDS: TL1 TL2 TL3 TL4 TL5 TL6 TL7 TL8 TL9 TL10 TL11 TL12 TR1 TR2 TR3 TR4 TR5 TR6 TR7 TR8 TR9 TR10 TR11 TR12
+TURN DEGREE COMMANDS: TL1D TR1D TL2D TR2D TL3D TR3D TL4D TR4D TL5D TR5D
+WAIT COMMANDS: WAITM WAITC WAITD
+COLOR COMMANDS: BLUECOLOR REDCOLOR GREENCOLOR BRIGHTRANGE MEDIUMRANGE DARKRANGE FULLRANGE
+ROTATE COMMANDS: ROTATE ROTATE1 ROTATE1L ROTATE1R
+-->
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0, shrink-to-fit=no"/>
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="icon" href="icons/kiln.png">
+        <link rel="apple-touch-icon" href="icons/kiln.png">
+        <link rel="shortcut icon" type="image/png" href="icons/kiln.png">
+
+        <link rel="stylesheet" href="kiln.css"
+        <style>
+
+        </style>
+
+
+        <!-- VueJs -->
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    </head>
+
+    <body>
+        <div id="kiln" class="pop">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+
+                        <canvas id="canvas" class="bevel"
+                            width="1024" height="1024"></canvas>
+
+                        <div id="prompt" class="bevel">
+
+                            <div class="pseudoprompt">&gt;</div>
+                            <input id="input" spellcheck="false" rows="1"
+                                v-model:value="input"
+                                v-on:keyup.enter="submit"
+                                v-on:keydown.up="histPrev"
+                                v-on:keydown.down="histNext"
+                                autocomplete="off"
+                                placeholder="type commands here"
+                                ></input>
+                        </div>
+
+                        <div id="hintbox" class="bevel" v-if="hint">
+                          <div class="pseudoprompt">&hellip;</div>
+                          <input id="hint" class="bevel" disabled="true" v-model:value="hint">
+                          </input>
+                        </div>
+
+                        <div>
+                            <textarea disabled id="output" class="bevel"
+                                onkeydown="return false;"
+                                rows="7">{{output}}</textarea>
+                        </div>
+
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div v-if="Object.keys(namespace).length!=0" class="buttonpanel bevel">
+                            <button class="user"
+                                v-for="(val, key) in namespace"
+                                v-on:click="executeCommand([key])"
+                                :disabled='hintCount >= 0'>
+                                {{key}}
+                            </button>
+                        </div>
+                        <div class="buttonpanel bevel">
+                            <button class="prim"
+                                v-for="(val, key) in prims"
+                                v-on:click="executeCommand([key])"
+                                :disabled='hintCount >= 0 || displayDefs'>
+                                {{key}}
+                            </button>
+                        </div>
+                        <div class="buttonpanel bevel">
+                            <button class="meta"
+                                v-for="(val, key) in metas"
+                                v-on:click="executeMeta(key)"
+                                :disabled='hintCount >= 0 || (displayDefs && key!="-defined")'
+                                v-if="!hidden.includes(key)">
+                                {{key}}
+                            </button>
+                        </div>
+                        <div>
+                            <textarea disabled id="help" class="bevel"
+                                onkeydown="return false;" v-if="displayHelp"
+                                rows="10">{{helpText}}</textarea>
+                        </div>
+                        <input type="file" id="rememberer" style="display:none" @change="loadNamespace"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="kiln.js"></script>
+
+
+    </body>
+</html>
