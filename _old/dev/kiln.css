@@ -1,0 +1,258 @@
+/*
+    Kiln: Programmatic Art using the simple Clay language
+    Copyright (C) 2020 John K. Lindstedt, PhD.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+body{
+    background: #000000;
+    margin: 0;
+}
+#kiln{
+    background-color: #222222;
+    background-image: linear-gradient(
+        -2deg,
+        #DE3163AA,
+        #33F3EF66 33%,
+        #6F00FF77 66%,
+        #FF00FF88
+    );
+    /*background-image: linear-gradient(-2deg,#080808, #190404 10%,#441a11 40%,#554411 80%, #665511 90%, #6E6E6E);*/
+    display: block;
+    margin: 0px auto;
+    padding: 10px 5px;
+    border-radius: 10px;
+    min-width: 320px;
+    max-width: 600px;
+    touch-action: manipulation;
+}
+textarea, input{
+    display: block;
+    font-family: monospace;
+    font-size: 2vh;
+    margin: 2px auto;
+    resize: none;
+    white-space: nowrap;
+    background: #000000E5;
+    outline: none;
+    scrollbar-width: thin;
+}
+textarea:disabled, input:disabled{
+    background-color: #000000E5;
+    /*-webkit-text-fill-color: #880000;*/
+    opacity: 1;
+}
+textarea:focus, input:focus{
+    outline-width: 0;
+}
+
+textarea:focus::placeholder,input:focus::placeholder {
+  opacity: 0.0;
+}
+textarea::placeholder, input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #FF00FF66;
+  opacity: 1;
+  font-weight: bold;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000000E5;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #444444E5;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+@-webkit-keyframes glow {
+    to {
+         border-color: #000000FF;
+    -webkit-box-shadow: 0 0 5px #000000FF;
+       -moz-box-shadow: 0 0 5px #000000FF;
+            box-shadow: 0 0 5px #000000FF;
+    }
+}
+#prompt{
+    font-family: monospace;
+    font-size: 3vh;
+    color: #FF00FFFF;
+    background-color: #000000FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90.5%;
+    margin: 0 auto;
+    font-weight: bold;
+    border: 2px solid #FF00FFFF;
+    -webkit-animation: glow 2.0s infinite alternate;
+    -webkit-transition: border 2.0s linear, box-shadow 2.0s linear;
+       -moz-transition: border 2.0s linear, box-shadow 2.0s linear;
+            transition: border 2.0s linear, box-shadow 2.0s linear;
+}
+
+#input{
+    color: #FF00FFcc;
+    width: 100%;
+    border: none;
+    font-size: 2vh;
+    text-indent: 20px;
+    font-weight: bold;
+    background: transparent;
+    z-index: 0;
+
+}
+#hintbox{
+  font-family: monospace;
+  font-size: 3vh;
+  color: #6F00FFFF;
+  background-color: #000000FF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 91%;
+  margin: 0 auto;
+  font-weight: bold;
+}
+#hint{
+  color: #6F00FFFF;
+  width: 100%;
+  border: none;
+  font-size: 2vh;
+  text-indent: 20px;
+  font-weight: bold;
+  font-style: italic;
+  background: transparent;
+  z-index: 0;
+}
+.pseudoprompt{
+    position: relative;
+    background: transparent;
+    font-size: 2vh;
+    left: 3px;
+    width: 0%;
+    z-index: 1;
+}
+#output{
+    color: #FF00FF88;
+    width: 90%;
+    font-size: 1.8vh;
+    border: none;
+    white-space: pre-line;
+    font-weight: bold;
+}
+#output::first-line{
+    color: #FF00FFCC;
+    font-weight: bold;
+    font-size: 1.9vh;
+}
+#commands{
+    color: color: #ED008C;
+}
+#canvas{
+    background: #000000;
+    display: block;
+    margin: 5px auto;
+    max-width: 90%;
+    max-height: 350px;
+}
+#help{
+    color: #FFFFFFFF;
+    width: 90%;
+    font-size: 1.3vh;
+    border: none;
+    white-space: pre-line;
+    font-weight: bold;
+}
+button{
+    background-image: linear-gradient(-2deg,#080808, #181818);
+    margin: 2px;
+    font-size: 12pt;
+    font-family: monospace;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px;
+    outline: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+button:active{
+    background-image: linear-gradient(-2deg,#181818,#080808);
+    color: #ffffff;
+}
+button:disabled{
+    opacity: 0.25;
+}
+.buttonpanel{
+    background-color: #222222CC;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 5px auto;
+    min-height: 10px;
+}
+.prim{
+    /*color: #ED008C;*/
+    color: #DE3163;
+    border: 2px solid #DE3163cc;
+    -webkit-animation: glow 2.1s infinite alternate;
+    -webkit-transition: border 2.1s linear, box-shadow 2.1s linear;
+       -moz-transition: border 2.1s linear, box-shadow 2.1s linear;
+            transition: border 2.1s linear, box-shadow 2.1s linear;
+}
+
+.meta{
+    color:#6F00FF;
+    border: 2px solid #6F00FFcc;
+    -webkit-animation: glow 2.2s infinite alternate;
+    -webkit-transition: border 2.2s linear, box-shadow 2.2s linear;
+       -moz-transition: border 2.2s linear, box-shadow 2.2s linear;
+            transition: border 2.2s linear, box-shadow 2.2s linear;
+}
+.user{
+    color:#33F3EF;
+    border: 2px solid #33F3EFcc;
+    -webkit-animation: glow 2.3s infinite alternate;
+    -webkit-transition: border 2.3s linear, box-shadow 2.3s linear;
+       -moz-transition: border 2.3s linear, box-shadow 2.3s linear;
+            transition: border 2.3s linear, box-shadow 2.3s linear;
+}
+.bevel{
+    border: 1px solid #000000;
+    border-right: 1px solid #111111;
+    border-bottom: 1px solid #111111;
+    border-radius: 5px;
+}
+.pop{
+    border: 1px solid #000000;
+    border-left: 1px solid #080808;
+    border-top: 2px solid #080808;
+    border-radius: 5px;
+}
+#downloadDummy{
+    display: none;
+}
