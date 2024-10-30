@@ -343,7 +343,7 @@ const metaCommands: Record<string, (state: KilnState) => KilnState> = {
   },
 }
 
-export default function Kiln() {
+export function KilnComponent() {
   const [state, setState] = useState<KilnState>(initialState)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
