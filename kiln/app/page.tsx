@@ -1,5 +1,5 @@
-import { KilnComponent } from "@/components/kiln"
+import { KilnComponent } from "@/components/kiln";
 
 export default function Page() {
-  return <KilnComponent />
+  return <KilnComponent />;
 }
