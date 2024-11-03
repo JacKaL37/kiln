@@ -385,7 +385,7 @@ const captureCurrentState = (state: KilnState): any => {
 };
 
 const openai = new OpenAI({
-  apiKey: "",
+  apiKey: "sk-proj-",
   dangerouslyAllowBrowser: true,
 });
 
@@ -419,20 +419,24 @@ export function KilnComponent() {
 
     Multiplier prefixes:
     You can use multipliers, e.g., 5paint will execute paint 5 times (though without moving, this will just paint in the same spot).
+    Multipliers work on EXACTLY ONE token-- the one they are attached to. 
 
     Composing command strings:
     Commands are executed left-to-right in order, so if you want to move before painting, you could use \`move paint\`
-    Note that commands are ATOMIC. No command ever has a follow-up argument, they always do exactly one thing.
+    Note that commands are ATOMIC. No command ever has a follow-up argument, they always do exactly one thing when evaluated. 
 
     Defining new commands:
     To define a command, use the \`>>\` operator.
     e.g., if you want to define a \`dot\` command that will move the painter randomly, then paint a dot, use \`dot >> move paint\`
-    Note that you cannot define new command tokens with multiplier prefixes. Avoid this.
+    Note that you cannot define new command tokens with multiplier prefixes, nor should you try to override a prim. Avoid this.
+    Commands cannot contain meta-commands. 
+    Defining a command does not execute it. You must call commands explicitly. 
 
-    Commands you define can be composed of other commands (and multipliers), e.g.:
+    Commands you define can be composed of other commands (and multipliers).
+    e.g.:
     - dot: move paint
-    - pdot: pink dot
-    - pinkdots: 500pdot
+      - pdot: pink dot
+        - pinkdots: 500pdot
 
     Meta commands:
     -clean: clear all paint from canvas
@@ -532,7 +536,16 @@ export function KilnComponent() {
     content: [
       {
         type: "text",
-        text: "I am sitting down to enjoy some time spent painting using the simple visual-art programming language, Clay. An example of the kinds of things I can do is: `dot >> move paint` tells the system to move the painter randomly and then paint. I could then use 50dot to make 50 random dots. I will examine the image of the canvas and then, fulfilling the provided json schema, I will write a rationale for the commands I am going to execute, and then the list of commands I want to be executed. I shouldn't do more than 3 commands at a time. I should consider the namespace available to me, as it is not always the same as those available in the examples.",
+        text: `
+        I am sitting down to enjoy some time spent painting using the simple visual-art programming language, Clay. 
+        An example of the kinds of things I can do is: \`dot >> move paint\` tells the system to move the painter randomly and then paint. 
+        I could then use 50dot to make 50 random dots, but only because I defined it that way. 
+        I will examine the image of the canvas and then, fulfilling the provided json schema, I will write a rationale for the commands I am going to execute, and then the list of commands I want to be executed. 
+        I shouldn't do more than 3 command sequences at a time, though I should make them more complex over time to explore new possibilities. 
+        I should define lots of commands to make the most of the system! I can achieve a lot with hierarhically complex commands. 
+        I can't use a newly defined command until the next time I interact with the canvas, so I should define them at the end, and not expect to use them immediately. 
+        I should always consider the current namespace available to me, as it is not always the same as those available in the examples and I may have to work my way up to them.
+        `,
       },
       { type: "text", text: JSON.stringify(examples) },
       { type: "text", text: JSON.stringify(helpText) },
@@ -732,7 +745,7 @@ export function KilnComponent() {
         },
       ],
     });
-    console.log(response);
+    console.log(response.choices[0].message.content);
   };
 
   const interactWithModel = async (state: KilnState) => {
@@ -748,11 +761,12 @@ export function KilnComponent() {
     };
     console.log(newMessage);
 
-    //update aiHistory, but only up to 10 messages
-    if (state.aiHistory.length >= 10) {
-      state.aiHistory.shift();
-    }
     state.aiHistory.push(newMessage);
+
+    //snip off all but 10 mose recent messages
+    if (state.aiHistory.length > 10) {
+      state.aiHistory = state.aiHistory.slice(-10);
+    }
 
     //concatenate system prompt with the aiHistory
     const messages = [systemPromptMessage, ...state.aiHistory];
@@ -773,6 +787,8 @@ export function KilnComponent() {
       role: "assistant",
       content: JSON.stringify(data),
     });
+    send(data.image_assessment);
+    send(data.command_result_expectation);
     return data;
   };
 
@@ -787,7 +803,7 @@ export function KilnComponent() {
       modelCommands: commands,
       isModelProcessing: true,
     }));
-
+  
     for (const command of commands) {
       await new Promise((resolve) => setTimeout(resolve, 500)); // Adjust delay as needed
       setState((prevState) => {
@@ -795,7 +811,7 @@ export function KilnComponent() {
         return prevState;
       });
     }
-
+  
     setState((prevState) => ({ ...prevState, isModelProcessing: false }));
   };
 
